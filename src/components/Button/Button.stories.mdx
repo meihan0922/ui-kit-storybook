@@ -1,0 +1,78 @@
+import { Button } from "./Button";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+
+<Meta title="Button" component={Button} />
+
+# Button
+
+### Size
+
+<Preview>
+  <Story name="Size">
+    <>
+      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+        <Button>Download</Button>
+        <Button variants="style2">Download</Button>
+        <Button variants="style3">Download</Button>
+        <Button variants="style4">Download</Button>
+      </div>
+      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+        <Button size="lg">Download</Button>
+        <Button size="lg" variants="style2">
+          Download
+        </Button>
+        <Button size="lg" variants="style3">
+          Download
+        </Button>
+        <Button size="lg" variants="style4">
+          Download
+        </Button>
+      </div>
+    </>
+  </Story>
+</Preview>
+
+### Disabled
+
+<Preview>
+  <Story name="Disabled">
+    <>
+      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+        <Button disabled>Download</Button>
+        <Button disabled variants="style2">
+          Download
+        </Button>
+        <Button disabled variants="style3">
+          Download
+        </Button>
+        <Button disabled variants="style4">
+          Download
+        </Button>
+      </div>
+      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+        <Button disabled size="lg">
+          Download
+        </Button>
+        <Button disabled size="lg" variants="style2">
+          Download
+        </Button>
+        <Button disabled size="lg" variants="style3">
+          Download
+        </Button>
+        <Button disabled size="lg" variants="style4">
+          Download
+        </Button>
+      </div>
+    </>
+  </Story>
+</Preview>
+
+### Block
+
+<Preview>
+  <Story name="Block">
+    <Button block>Download</Button>
+  </Story>
+</Preview>
+
+<Props story="Size" />
