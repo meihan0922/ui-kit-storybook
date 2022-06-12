@@ -1,5 +1,12 @@
 import { Button } from "./Button";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleLeft,
+  faAngleRight,
+  faGear,
+} from "@fortawesome/free-solid-svg-icons";
+import { Color } from "../../type/color.ts";
 
 <Meta title="Button" component={Button} />
 
@@ -10,13 +17,19 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
 <Preview>
   <Story name="Size">
     <>
-      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
         <Button>Download</Button>
         <Button variants="style2">Download</Button>
         <Button variants="style3">Download</Button>
         <Button variants="style4">Download</Button>
+        <Button>
+          <FontAwesomeIcon size="lg" icon={faGear} />
+        </Button>
+        <Button variants="style4">
+          <FontAwesomeIcon size="lg" icon={faGear} />
+        </Button>
       </div>
-      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
         <Button size="lg">Download</Button>
         <Button size="lg" variants="style2">
           Download
@@ -37,7 +50,7 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
 <Preview>
   <Story name="Disabled">
     <>
-      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
         <Button disabled>Download</Button>
         <Button disabled variants="style2">
           Download
@@ -48,8 +61,14 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
         <Button disabled variants="style4">
           Download
         </Button>
+        <Button disabled>
+          <FontAwesomeIcon size="lg" icon={faGear} />
+        </Button>
+        <Button disabled variants="style4">
+          <FontAwesomeIcon size="lg" icon={faGear} />
+        </Button>
       </div>
-      <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
         <Button disabled size="lg">
           Download
         </Button>
@@ -72,6 +91,80 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
 <Preview>
   <Story name="Block">
     <Button block>Download</Button>
+  </Story>
+</Preview>
+
+### Combined Buttons
+
+<Preview>
+  <Story name="Combined Buttons">
+    <div
+      style={{
+        display: "flex",
+        gap: "40px",
+        marginBottom: "10px",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Button combined="left">
+          <FontAwesomeIcon size="lg" icon={faAngleLeft} />
+          <p style={{ marginLeft: "14px", display: "inline-block" }}>Back</p>
+        </Button>
+        <Button combined="right" variants="style4">
+          <p style={{ marginRight: "14px", display: "inline-block" }}>Next</p>
+          <FontAwesomeIcon size="lg" icon={faAngleRight} />
+        </Button>
+      </div>
+      <div>
+        <Button combined="left">Back</Button>
+        <Button combined="right" variants="style4">
+          Next
+        </Button>
+      </div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Button combined="left">
+          <FontAwesomeIcon size="lg" icon={faAngleLeft} />
+        </Button>
+        <Button combined="right" variants="style3">
+          <FontAwesomeIcon size="lg" icon={faAngleRight} />
+        </Button>
+      </div>
+    </div>
+  </Story>
+</Preview>
+
+### Combined Buttons Disabled
+
+<Preview>
+  <Story name="Combined Buttons Disabled">
+    <div style={{ display: "flex", gap: "40px" }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Button disabled combined="left">
+          <FontAwesomeIcon size="lg" icon={faAngleLeft} />
+          <p style={{ marginLeft: "14px", display: "inline-block" }}>Back</p>
+        </Button>
+        <Button disabled combined="right" variants="style4">
+          <p style={{ marginRight: "14px", display: "inline-block" }}>Next</p>
+          <FontAwesomeIcon size="lg" icon={faAngleRight} />
+        </Button>
+      </div>
+      <div>
+        <Button disabled combined="left">
+          Back
+        </Button>
+        <Button disabled combined="right" variants="style4">
+          Next
+        </Button>
+      </div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Button disabled combined="left">
+          <FontAwesomeIcon size="lg" icon={faAngleLeft} />
+        </Button>
+        <Button disabled combined="right" variants="style4">
+          <FontAwesomeIcon size="lg" icon={faAngleRight} />
+        </Button>
+      </div>
+    </div>
   </Story>
 </Preview>
 

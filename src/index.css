@@ -1,13 +1,37 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --chartColor-blue: #0011f6;
+  --chartColor-blue-opacity-25: #0011f640;
+  --chartColor-mainBlue: #3240ff;
+  --chartColor-mainBlue-opacity-25: #3240ff40;
+  --chartColor-lightBlue: #3c91ff;
+  --chartColor-nautical: #48e3ff;
+  --chartColor-turquoise: #0bffdb;
+  --chartColor-lightViolet: #bb9cff;
+  --chartColor-violet: "#8122FF";
+  --chartColor-red: "#FD005C";
+  --chartColor-lightRed: #ff8baa;
+  --styleColors-mainGray: #2a3f58;
+  --styleColors-darkGray: #72809d;
+  --styleColors-gray: #ccd2de;
+  --styleColors-lightGray: #fdf2f5;
+  --styleColors-lightBlue: #f4f7fc;
+  --styleColors-greyBlue: #dbe9ff;
+  --systemColors-success: #a7e521;
+  --systemColors-info: #03c3ec;
+  --systemColors-alert: #ffd422;
+  --systemColors-error: #ef3f26;
 }

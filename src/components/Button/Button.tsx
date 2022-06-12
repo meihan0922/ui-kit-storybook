@@ -1,5 +1,6 @@
 import React from "react";
 import cx from "classnames";
+import "./button.css";
 
 type BtnSize = "lg" | "sm";
 type BtnStyle = "style1" | "style2" | "style3" | "style4";
@@ -19,19 +20,24 @@ export interface IButtonProps extends NativeProps {
   url?: string;
   /** children */
   children: React.ReactNode;
+  /** if combined button */
+  combined?: "none" | "left" | "right";
 }
 
 const sizeVariants: { [key in BtnSize]: string } = {
-  sm: "px-5 py-2 text-sm",
+  sm: "px-4 py-2 text-sm",
   lg: "px-7 py-3 text-base",
 };
 
 const styleVariants: { [key in BtnStyle]: string } = {
-  style1: "text-white bg-chartColor-mainBlue",
+  style1:
+    "text-white bg-chartColor-mainBlue border border-2 border-transparent",
   style2:
     "text-chartColor-mainBlue bg-white border border-2 border-chartColor-mainBlue",
-  style3: "text-chartColor-mainBlue bg-styleColors-lightBlue",
-  style4: "text-styleColors-darkGray bg-white border border-styleColors-gray",
+  style3:
+    "text-chartColor-mainBlue bg-styleColors-lightBlue border border-2 border-transparent",
+  style4:
+    "text-styleColors-mainGray bg-white border border-2 border-styleColors-gray",
 };
 
 const styleEventsVariants: { [key in BtnStyle]: string } = {
@@ -49,19 +55,22 @@ export const Button = ({
   children,
   variants = "style1",
   url = "",
+  combined = "none",
   ...restProps
 }: IButtonProps) => {
   return url ? (
     <a
       className={cx(
-        `rounded disabled:opacity-75 ${sizeVariants[size]} ${styleVariants[variants]}`,
+        `storybook-button rounded disabled:opacity-25 ${variants} ${sizeVariants[size]} ${styleVariants[variants]}`,
         {
           [styleEventsVariants[variants]]: !disabled,
         },
         {
-          "pointer-events-none": disabled,
+          "pointer-events-none disabled": disabled,
         },
-        { "w-full": block }
+        { "w-full": block },
+        { "rounded-r-none": combined === "left" },
+        { "rounded-l-none": combined === "right" }
       )}
       href={url}
       {...restProps}
@@ -71,11 +80,16 @@ export const Button = ({
   ) : (
     <button
       className={cx(
-        `rounded disabled:opacity-75 ${sizeVariants[size]} ${styleVariants[variants]}`,
+        `storybook-button rounded disabled:opacity-25 ${variants} ${sizeVariants[size]} ${styleVariants[variants]}`,
         {
           [styleEventsVariants[variants]]: !disabled,
         },
-        { "w-full": block }
+        {
+          disabled,
+        },
+        { "w-full": block },
+        { "rounded-r-none": combined === "left" },
+        { "rounded-l-none": combined === "right" }
       )}
       disabled={disabled}
       {...restProps}
