@@ -1,0 +1,21 @@
+import { Alert } from "./Alert";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+
+<Meta title="Alert" component={Alert} />
+
+# Alert
+
+### Alert
+
+<Preview>
+  <Story name="basic">
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <Alert type="success">Success notification</Alert>
+      <Alert type="info">Info notification</Alert>
+      <Alert type="alert">Alert notification</Alert>
+      <Alert type="warn">Wranning notification</Alert>
+    </div>
+  </Story>
+</Preview>
+
+<Props story="basic" />
