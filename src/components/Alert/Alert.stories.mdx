@@ -5,10 +5,12 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
 
 # Alert
 
+<Props components={{ Alert }} />
+
 ### Alert
 
 <Preview>
-  <Story name="basic">
+  <Story name="Basic">
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <Alert type="success">Success notification</Alert>
       <Alert type="info">Info notification</Alert>
@@ -17,5 +19,3 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
     </div>
   </Story>
 </Preview>
-
-<Props story="basic" />

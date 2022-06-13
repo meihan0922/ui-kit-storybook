@@ -1,6 +1,5 @@
 import React from "react";
 import cx from "classnames";
-import "./button.css";
 
 type BtnSize = "lg" | "sm";
 type BtnStyle = "style1" | "style2" | "style3" | "style4";
@@ -61,7 +60,7 @@ export const Button = ({
   return url ? (
     <a
       className={cx(
-        `storybook-button rounded disabled:opacity-25 ${variants} ${sizeVariants[size]} ${styleVariants[variants]}`,
+        `rounded disabled:opacity-25 ${sizeVariants[size]} ${styleVariants[variants]}`,
         {
           [styleEventsVariants[variants]]: !disabled,
         },

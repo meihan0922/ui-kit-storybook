@@ -1,0 +1,192 @@
+import { SideBars } from "./SideBars.tsx";
+import { SideBarsItem } from "./SideBarsItem.tsx";
+import { SideBarsGroup } from "./SideBarsGroup.tsx";
+import { Meta, Story, Preview, Props, ArgsTable } from "@storybook/addon-docs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChartSimple,
+  faChartPie,
+  faCalendarDays,
+  faNewspaper,
+  faBookBookmark,
+  faDiagramProject,
+  faGear,
+  faAtom,
+  faBell,
+} from "@fortawesome/free-solid-svg-icons";
+
+<Meta title="SideBars" component={SideBars} subcomponents={SideBarsItem} />
+
+# SideBars
+
+總共有三種樣式，一定要搭配子組件`<SideBarsItem>`或`<SideBarsGroup>`使用。
+
+- `<SideBarsGroup>`：將子選項群組，可以另外設定下拉選單。
+- `<SideBarsItem>`：子選項。
+
+<Props components={{ SideBars, SideBarsGroup, SideBarsItem }} />
+
+### Style1
+
+<Preview>
+  <Story name="Style1">
+    <SideBars>
+      <SideBarsGroup text="TOOLS">
+        <SideBarsItem icon={<FontAwesomeIcon icon={faChartSimple} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faChartPie} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faCalendarDays} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faNewspaper} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faBookBookmark} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faDiagramProject} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faGear} />} />
+      </SideBarsGroup>
+    </SideBars>
+  </Story>
+</Preview>
+
+### Style1 with text
+
+<Preview>
+  <Story name="Style1 with text">
+    <SideBars size="lg">
+      <SideBarsGroup text="TOOLS">
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faChartSimple} />}
+          text="Dashboard"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faChartPie} />}
+          text="Statistic"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faCalendarDays} />}
+          text="Schedule"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faNewspaper} />}
+          text="Reports"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faBookBookmark} />}
+          text="Visitors"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faDiagramProject} />}
+          text="Segements"
+        />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faGear} />} text="Setting" />
+      </SideBarsGroup>
+    </SideBars>
+  </Story>
+</Preview>
+
+### Style2 with SideBarsGroup
+
+<Preview>
+  <Story name="Style2">
+    <SideBars variants="style2">
+      <SideBarsGroup text="TOOLS">
+        <SideBarsItem icon={<FontAwesomeIcon icon={faChartSimple} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faChartPie} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faCalendarDays} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faNewspaper} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faBookBookmark} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faDiagramProject} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faGear} />} />
+      </SideBarsGroup>
+      <SideBarsGroup text="TOOLS">
+        <SideBarsItem icon={<FontAwesomeIcon icon={faAtom} />} />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faBell} />} />
+      </SideBarsGroup>
+    </SideBars>
+  </Story>
+</Preview>
+
+### Style2 with text, SideBarsGroup
+
+<Preview>
+  <Story name="Style2 with text">
+    <SideBars variants="style2" size="lg">
+      <SideBarsGroup text="TOOLS">
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faChartSimple} />}
+          text="Dashboard"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faChartPie} />}
+          text="Statistic"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faCalendarDays} />}
+          text="Schedule"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faNewspaper} />}
+          text="Reports"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faBookBookmark} />}
+          text="Visitors"
+        />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faDiagramProject} />}
+          text="Segements"
+        />
+        <SideBarsItem icon={<FontAwesomeIcon icon={faGear} />} text="Setting" />
+      </SideBarsGroup>
+      <SideBarsGroup text="INDUSTRY">
+        <SideBarsItem icon={<FontAwesomeIcon icon={faAtom} />} text="Trading" />
+        <SideBarsItem
+          icon={<FontAwesomeIcon icon={faBell} />}
+          text="Business"
+        />
+      </SideBarsGroup>
+    </SideBars>
+  </Story>
+</Preview>
+
+### Style3
+
+<Preview>
+  <Story name="Style3">
+    <SideBars variants="style3">
+      <SideBarsItem
+        icon={<FontAwesomeIcon icon={faChartSimple} />}
+        text="Dashboard"
+      />
+      <SideBarsItem
+        icon={<FontAwesomeIcon icon={faChartPie} />}
+        text="Statistic"
+      />
+      <SideBarsItem
+        icon={<FontAwesomeIcon icon={faCalendarDays} />}
+        text="Schedule"
+      />
+      <SideBarsItem
+        icon={<FontAwesomeIcon icon={faNewspaper} />}
+        text="Reports"
+      />
+      <SideBarsItem icon={<FontAwesomeIcon icon={faGear} />} text="Setting" />
+    </SideBars>
+  </Story>
+</Preview>
+
+### Style3 with text, SideBarsGroup, toggleable, defaultOpen
+
+<Preview>
+  <Story name="Style3 with text">
+    <SideBars variants="style3" size="lg">
+      <SideBarsGroup text="TOOLS" toggleable defaultOpen>
+        <SideBarsItem text="Dashboard" />
+        <SideBarsItem text="Statistic" />
+        <SideBarsItem text="Schedule" />
+      </SideBarsGroup>
+      <SideBarsGroup text="TOOLS" toggleable>
+        <SideBarsItem text="Reports" />
+        <SideBarsItem text="Visitors" />
+        <SideBarsItem text="Segements" />
+        <SideBarsItem text="Setting" />
+      </SideBarsGroup>
+    </SideBars>
+  </Story>
+</Preview>
