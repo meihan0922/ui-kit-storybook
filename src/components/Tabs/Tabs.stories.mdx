@@ -1,0 +1,92 @@
+import { Tabs } from "./Tabs.tsx";
+import { Tab } from "./Tab.tsx";
+import { TabsList } from "./TabsList.tsx";
+import { TabsPanel } from "./TabsPanel.tsx";
+import { TabsPanels } from "./TabsPanels.tsx";
+import { Meta, Story, Preview, Props, ArgsTable } from "@storybook/addon-docs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDiagramProject } from "@fortawesome/free-solid-svg-icons";
+
+<Meta
+  title="Tabs"
+  component={Tabs}
+  subcomponents={{ Tab, TabsList, TabsPanels, TabsPanel }}
+/>
+
+# Tabs
+
+樣式相同，只有大小之分。
+
+- `<Tabs>`：需放在最外層，用來建立 provider。
+- `<TabsList>`： `<Tabs>` 的子元件，為上方列表，內容物必須為`<Tab>`。
+- `<TabsPanels>`： `<Tabs>` 的子元件，為下方 body 顯示區塊，內容物必須為`<TabsPanel>`。
+- `<Tab>`： `<TabsList>` 的子元件。
+- `<TabsPanel>`： `<TabsPanels>`的子元件。
+
+<Props components={{ Tabs, Tab, TabsList, TabsPanels, TabsPanel }} />
+
+### size - sm with icon
+
+<Preview>
+  <Story name="size:sm with icon">
+    <Tabs defaultIndex={0}>
+      <TabsList>
+        <Tab>
+          <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
+            <FontAwesomeIcon icon={faDiagramProject} size="sm" />
+            Tab name
+          </div>
+        </Tab>
+        <Tab>
+          <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
+            <FontAwesomeIcon icon={faDiagramProject} size="sm" />
+            Tab name
+          </div>
+        </Tab>
+      </TabsList>
+    </Tabs>
+  </Story>
+</Preview>
+
+### size - lg
+
+<Preview>
+  <Story name="size:lg">
+    <Tabs size="lg" defaultIndex={0}>
+      <TabsList>
+        <Tab>Tab name</Tab>
+        <Tab>Tab name</Tab>
+      </TabsList>
+    </Tabs>
+  </Story>
+</Preview>
+
+### size - lg with disabled
+
+<Preview>
+  <Story name="size:lg with disabled">
+    <Tabs size="lg" defaultIndex={1}>
+      <TabsList>
+        <Tab disabled>Tab name</Tab>
+        <Tab disabled>Tab name</Tab>
+      </TabsList>
+    </Tabs>
+  </Story>
+</Preview>
+
+### TabsPanels
+
+<Preview>
+  <Story name="TabsPanels">
+    <Tabs size="lg" defaultIndex={1}>
+      <TabsList>
+        <Tab>Tab name</Tab>
+        <Tab>Tab name</Tab>
+      </TabsList>
+      <TabsPanels>
+        <TabsPanel>111</TabsPanel>
+        <TabsPanel>222</TabsPanel>
+      </TabsPanels>
+    </Tabs>
+  </Story>
+</Preview>

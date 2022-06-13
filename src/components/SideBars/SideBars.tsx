@@ -5,7 +5,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { ISideBarsItemProps } from "./SideBarsItem";
 
 export type SideBarsStyle = "style1" | "style2" | "style3";
-type SideBarsSize = "sm" | "lg";
+export type SideBarsSize = "sm" | "lg";
 
 export interface ISideBarsProps {
   /** SideBars size */
@@ -53,7 +53,7 @@ const SideBars = ({
     <div className="">
       <ul
         className={cx(
-          "h-screen flex flex-col  w-fit items-center bg-styleColors-lightBlue",
+          "h-screen flex flex-col w-fit items-center bg-styleColors-lightBlue",
           {
             "px-2": variants === "style3",
             "min-w-[110px] w-[110px]": size === "sm",

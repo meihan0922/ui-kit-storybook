@@ -1,7 +1,7 @@
 import React, { useContext, useReducer } from "react";
 import cx from "classnames";
 import { motion, AnimatePresence } from "framer-motion";
-import { SideBarsContext } from "./SideBars";
+import { SideBarsContext, SideBarsSize } from "./SideBars";
 import { ISideBarsItemProps } from "./SideBarsItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +24,13 @@ const ArrowVariants = {
   closed: { rotate: 180 },
 };
 
+const SizeVariants: {
+  [key in SideBarsSize]: string;
+} = {
+  sm: "justify-center",
+  lg: "justify-between pl-[40px] pr-2",
+};
+
 const SideBarsGroup = ({
   defaultOpen = false,
   text,
@@ -32,9 +39,9 @@ const SideBarsGroup = ({
   children,
 }: ISideBarsGroupProps) => {
   const { activeIndex, size } = useContext(SideBarsContext);
+  const isToggleAble = size === "lg" && toggleable;
   const [isOpen, toggleOpen] = useReducer((state) => !state, defaultOpen);
   const level = activeIndex.split("-")[0];
-  console.log("iiii", level === index);
   //   const handleClick = () => {
   //     toggleOpen()
   //   };
@@ -43,25 +50,23 @@ const SideBarsGroup = ({
     <li key={index} className="w-full mb-5">
       <div
         onClick={() => {
-          if (size === "lg" && toggleable) toggleOpen();
+          if (isToggleAble) toggleOpen();
         }}
-        className={cx(`flex items-center mb-3 text-xs`, {
-          "justify-between pl-[40px] pr-2": size === "lg",
-          "justify-center": size === "sm",
-          "cursor-pointer": size === "lg" && toggleable,
-          "text-chartColor-blue": level === index,
+        className={cx(`flex items-center mb-3 text-xs ${SizeVariants[size]}`, {
+          "cursor-pointer": isToggleAble,
+          "text-chartColor-blue": isToggleAble && level === index,
           "text-styleColors-darkGray": level !== index,
         })}
       >
         <p>{text}</p>
-        {size === "lg" && toggleable ? (
+        {isToggleAble && (
           <motion.div
             animate={isOpen ? "open" : "closed"}
             variants={ArrowVariants}
           >
             <FontAwesomeIcon icon={faCaretUp} />
           </motion.div>
-        ) : null}
+        )}
       </div>
       <AnimatePresence>
         {((toggleable && isOpen) || !toggleable) && (

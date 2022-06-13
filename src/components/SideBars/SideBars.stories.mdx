@@ -15,11 +15,15 @@ import {
   faBell,
 } from "@fortawesome/free-solid-svg-icons";
 
-<Meta title="SideBars" component={SideBars} subcomponents={SideBarsItem} />
+<Meta
+  title="SideBars"
+  component={SideBars}
+  subcomponents={{ SideBarsItem, SideBarsGroup }}
+/>
 
 # SideBars
 
-總共有三種樣式，一定要搭配子組件`<SideBarsItem>`或`<SideBarsGroup>`使用。
+有三種樣式，一定要搭配子組件`<SideBarsItem>`或`<SideBarsGroup>`使用。
 
 - `<SideBarsGroup>`：將子選項群組，可以另外設定下拉選單。
 - `<SideBarsItem>`：子選項。
