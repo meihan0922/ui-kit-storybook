@@ -33,7 +33,7 @@ const Tab = ({ children, index, disabled = false }: ITabButton) => {
       className={cx(`${sizeStyle[size]} relative hover:text-chartColor-blue`, {
         "text-chartColor-blue": activeIndex === index,
         "text-styleColors-mainGray": activeIndex !== index,
-        "opacity-25 pointer-events-none": disabled,
+        "opacity-50 pointer-events-none": disabled,
         "cursor-pointer": !disabled,
       })}
     >

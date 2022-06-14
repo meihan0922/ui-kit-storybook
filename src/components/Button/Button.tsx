@@ -60,7 +60,7 @@ export const Button = ({
   return url ? (
     <a
       className={cx(
-        `rounded disabled:opacity-25 ${sizeVariants[size]} ${styleVariants[variants]}`,
+        `rounded disabled:opacity-50 ${sizeVariants[size]} ${styleVariants[variants]}`,
         {
           [styleEventsVariants[variants]]: !disabled,
         },
@@ -79,7 +79,7 @@ export const Button = ({
   ) : (
     <button
       className={cx(
-        `storybook-button rounded disabled:opacity-25 ${variants} ${sizeVariants[size]} ${styleVariants[variants]}`,
+        `rounded disabled:opacity-50 ${sizeVariants[size]} ${styleVariants[variants]}`,
         {
           [styleEventsVariants[variants]]: !disabled,
         },
