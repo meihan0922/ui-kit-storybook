@@ -1,0 +1,23 @@
+import { PaginationSpread } from "./PaginationSpread.tsx";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleLeft,
+  faAngleRight,
+  faGear,
+} from "@fortawesome/free-solid-svg-icons";
+import { Color } from "../../type/color.ts";
+
+<Meta title="PaginationSpread" component={PaginationSpread} />
+
+# PaginationSpread
+
+<Props components={{ PaginationSpread }} />
+
+### PaginationSpread
+
+<Preview>
+  <Story name="PaginationSpread">
+    <PaginationSpread currentPage={1} totalPage={6} />
+  </Story>
+</Preview>
