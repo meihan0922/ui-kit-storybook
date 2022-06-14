@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { forwardRef, useContext, useRef } from "react";
 import { TabsContext } from "./Tabs";
 import { ITabsPanelProps } from "./TabsPanel";
 
@@ -7,7 +7,7 @@ export interface ITabsPanelsProps {
   children: JSX.Element;
 }
 
-const TabsPanels = React.forwardRef<HTMLDivElement, ITabsPanelsProps>(
+const TabsPanels = forwardRef<HTMLDivElement, ITabsPanelsProps>(
   ({ children }, ref) => {
     const { activeIndex } = useContext(TabsContext);
     const ContentWrapper = useRef<HTMLDivElement>(null);

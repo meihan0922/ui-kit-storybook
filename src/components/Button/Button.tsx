@@ -28,23 +28,24 @@ const sizeVariants: { [key in BtnSize]: string } = {
   lg: "px-7 py-3 text-base",
 };
 
-const styleVariants: { [key in BtnStyle]: string } = {
-  style1:
-    "text-white bg-chartColor-mainBlue border border-2 border-transparent",
-  style2:
-    "text-chartColor-mainBlue bg-white border border-2 border-chartColor-mainBlue",
-  style3:
-    "text-chartColor-mainBlue bg-styleColors-lightBlue border border-2 border-transparent",
-  style4:
-    "text-styleColors-mainGray bg-white border border-2 border-styleColors-gray",
-};
-
-const styleEventsVariants: { [key in BtnStyle]: string } = {
-  style1: "hover:bg-chartColor-blue active:bg-chartColor-blue",
-  style2: "hover:border-chartColor-blue active:border-chartColor-blue",
-  style3: "hover:bg-styleColors-gray active:bg-styleColors-gray",
-  style4:
-    "hover:border-chartColor-mainBlue hover:text-chartColor-mainBlue active:border-chartColor-mainBlue active:text-chartColor-mainBlue",
+const styleVariants: { [key in BtnStyle]: { init: string; event: string } } = {
+  style1: {
+    init: "text-white bg-chartColor-mainBlue border border-2 border-transparent",
+    event: "hover:bg-chartColor-blue active:bg-chartColor-blue",
+  },
+  style2: {
+    init: "text-chartColor-mainBlue bg-white border border-2 border-chartColor-mainBlue",
+    event: "hover:border-chartColor-blue active:border-chartColor-blue",
+  },
+  style3: {
+    init: "text-chartColor-mainBlue bg-styleColors-lightBlue border border-2 border-transparent",
+    event: "hover:bg-styleColors-gray active:bg-styleColors-gray",
+  },
+  style4: {
+    init: "text-styleColors-mainGray bg-white border border-2 border-styleColors-gray",
+    event:
+      "hover:border-chartColor-mainBlue hover:text-chartColor-mainBlue active:border-chartColor-mainBlue active:text-chartColor-mainBlue",
+  },
 };
 
 export const Button = ({
@@ -60,9 +61,9 @@ export const Button = ({
   return url ? (
     <a
       className={cx(
-        `rounded disabled:opacity-50 ${sizeVariants[size]} ${styleVariants[variants]}`,
+        `rounded disabled:opacity-50 ${sizeVariants[size]} ${styleVariants[variants].init}`,
         {
-          [styleEventsVariants[variants]]: !disabled,
+          [styleVariants[variants].event]: !disabled,
         },
         {
           "pointer-events-none disabled": disabled,
@@ -79,9 +80,9 @@ export const Button = ({
   ) : (
     <button
       className={cx(
-        `rounded disabled:opacity-50 ${sizeVariants[size]} ${styleVariants[variants]}`,
+        `rounded disabled:opacity-50 ${sizeVariants[size]} ${styleVariants[variants].init}`,
         {
-          [styleEventsVariants[variants]]: !disabled,
+          [styleVariants[variants].event]: !disabled,
         },
         {
           disabled,

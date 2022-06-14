@@ -6,7 +6,6 @@ import {
   faCircleXmark,
   faCircleQuestion,
 } from "@fortawesome/free-solid-svg-icons";
-import cx from "classnames";
 import { Color } from "../../type/color";
 
 type AlertType = "success" | "info" | "alert" | "warn";
