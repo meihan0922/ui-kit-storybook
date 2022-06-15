@@ -49,8 +49,46 @@ export const Basic = () => {
     return fetch(`https://api.github.com/search/users?q=${query}`)
       .then((result) => result.json())
       .then(({ items }) => {
-        console.log(items);
-        return items?.slice(0, 10).map((i) => ({
+        return [
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+          ...items,
+        ]?.map((i, idx) => ({
           value: i.login,
           ...i,
         }));
