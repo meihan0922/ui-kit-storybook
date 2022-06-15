@@ -1,15 +1,10 @@
-import React, {
-  ReactElement,
-  InputHTMLAttributes,
-  ChangeEvent,
-  forwardRef,
-} from "react";
+import React, { InputHTMLAttributes, ChangeEvent, forwardRef } from "react";
 import cx from "classnames";
 
 type InputSize = "lg" | "sm";
 type InputStyle = "style1" | "style2";
 
-export interface InputProps
+export interface IInputProps
   extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
   /** Input error text */
   errorText?: string;
@@ -52,7 +47,7 @@ const styleVariants: { [key in InputStyle]: { init: string; event: string } } =
     },
   };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = forwardRef<HTMLInputElement, IInputProps>((props, ref) => {
   const {
     disabled,
     size = "sm",
@@ -77,7 +72,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     delete restProps.defaultValue;
     restProps.value = fixControlledValue(props.value);
   }
-  console.log("?????", `${sizeVariants[size].label}`, Boolean(label));
+
   return (
     <div className="relative">
       {icon && icon}

@@ -34,9 +34,9 @@ module.exports = {
       extensions: [
         ".js",
         ".jsx",
-        ".mdx",
         ".ts",
         ".tsx",
+        ".mdx",
         ".json",
         ".css",
         ".scss",
