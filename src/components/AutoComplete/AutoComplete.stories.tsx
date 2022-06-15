@@ -46,53 +46,16 @@ export const Basic = () => {
   };
 
   const newFetch = (query) => {
-    return fetch(`https://api.github.com/search/users?q=${query}`)
-      .then((result) => result.json())
-      .then(({ items }) => {
-        return [
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-          ...items,
-        ]?.map((i, idx) => ({
-          value: i.login,
-          ...i,
-        }));
-      });
+    return query
+      ? fetch(`https://api.github.com/search/users?q=${query}`)
+          .then((result) => result.json())
+          .then(({ items }) => {
+            return [...items]?.map((i, idx) => ({
+              value: i.login,
+              ...i,
+            }));
+          })
+      : [];
   };
 
   return (

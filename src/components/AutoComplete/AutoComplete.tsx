@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useTransition } from "react";
+import React, { useState, useEffect, useTransition, useCallback } from "react";
 import { Input, IInputProps } from "../Input/Input";
 import useDebounce from "../../hooks/useDebounce";
 interface DataSourceObj {
@@ -25,6 +25,7 @@ export const AutoComplete = ({
   renderOption,
   ...restProps
 }: IAutoCompleteProps) => {
+  const [isPending, startTransition] = useTransition();
   const [isShowDropdpwn, setShowDropDown] = useState(false);
   const [inputVal, setInputValue] = useState<string>(value as string);
   const [filterData, setFilterData] = useState<DataSourceType[]>([]);
@@ -36,30 +37,34 @@ export const AutoComplete = ({
       const result = fetchFn(debounceVal);
       if (result instanceof Promise) {
         result.then((res) => {
-          setFilterData(res);
+          // 預防需要處理的資料太大包，延遲顯示
+          startTransition(() => setFilterData(res));
+          // 不管如何isPending變動的時間晚於setIsLoading(false)
           setIsLoading(false);
         });
       } else {
-        setFilterData(result);
+        startTransition(() => setFilterData(result));
       }
     }
   }, [debounceVal, fetchFn]);
+  //   console.log("===============");
+  //   console.log("isLoading", isLoading);
+  //   console.log("isPending", isPending);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setInputValue(val);
-    if (val === "") {
-      setFilterData([]);
-    } else {
-      setIsLoading(true);
-    }
+    setIsLoading(true);
   };
 
-  const handleSelect = (i: DataSourceType) => {
-    setShowDropDown(false);
-    setInputValue(i.value);
-    onSelect && onSelect(i);
-  };
+  const handleSelect = useCallback(
+    (i: DataSourceType) => {
+      setShowDropDown(false);
+      setInputValue(i.value);
+      onSelect && onSelect(i);
+    },
+    [onSelect]
+  );
 
   return (
     <div className="">
@@ -69,16 +74,14 @@ export const AutoComplete = ({
         onFocus={() => setShowDropDown(true)}
         {...restProps}
       />
-      {isShowDropdpwn && isLoading ? "loading" : null}
-      {isShowDropdpwn && inputVal && !isLoading ? (
+      {isShowDropdpwn && (isPending || isLoading) ? "loading..." : null}
+      {isShowDropdpwn && inputVal && !isPending && !isLoading ? (
         filterData?.length > 0 ? (
-          <ul>
-            {filterData.map((i) => (
-              <li onClick={() => handleSelect(i)}>
-                {renderOption ? renderOption(i) : i.value}
-              </li>
-            ))}
-          </ul>
+          <List
+            data={filterData}
+            renderOption={renderOption}
+            handleSelect={handleSelect}
+          />
         ) : (
           "no data"
         )
@@ -86,3 +89,19 @@ export const AutoComplete = ({
     </div>
   );
 };
+
+const List = React.memo<{
+  data: DataSourceType[];
+  renderOption?: (item: DataSourceType) => JSX.Element;
+  handleSelect: (i: DataSourceType) => void;
+}>(({ data, renderOption, handleSelect }) => {
+  return (
+    <ul>
+      {data.map((i, idx) => (
+        <li key={i.value + idx} onClick={() => handleSelect(i)}>
+          {renderOption ? renderOption(i) : i.value}
+        </li>
+      ))}
+    </ul>
+  );
+});
