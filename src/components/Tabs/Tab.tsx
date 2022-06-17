@@ -1,6 +1,6 @@
 import cx from "classnames";
 import React, { useContext } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { TabsContext, SizeType } from "./Tabs";
 
 export interface ITabButton {
@@ -20,11 +20,15 @@ const sizeStyle: {
 };
 
 const Tab = ({ children, index, disabled = false }: ITabButton) => {
-  const { activeIndex, size, handleTabClick } = useContext(TabsContext);
+  const context = useContext(TabsContext);
+  if (!(context?.activeIndex && context?.size && context?.handleTabClick))
+    return null;
+
+  const { activeIndex, size, handleTabClick } = context;
 
   const handleClick = (e) => {
     e.preventDefault();
-    handleTabClick(index);
+    if (index) handleTabClick(index);
   };
 
   return (

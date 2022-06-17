@@ -9,8 +9,10 @@ export interface ITabsPanelsProps {
 
 const TabsPanels = React.forwardRef<HTMLDivElement, ITabsPanelsProps>(
   ({ children }, ref) => {
-    const { activeIndex } = useContext(TabsContext);
     const ContentWrapper = useRef<HTMLDivElement>(null);
+    const context = useContext(TabsContext);
+    if (!context) return null;
+    const { activeIndex } = context;
     const panelContainer =
       (ref as React.RefObject<HTMLDivElement>) || ContentWrapper;
 

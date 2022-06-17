@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 export type SizeType = "sm" | "lg";
 
@@ -18,41 +18,45 @@ export interface ITabsProps {
 interface ITabsContext {
   size?: SizeType;
   activeIndex: number;
-  handleTabClick?: (id: any) => void;
+  handleTabClick: (id: number) => void;
 }
 
-export const TabsContext = React.createContext<Partial<ITabsContext>>({});
+export const TabsContext = React.createContext<ITabsContext | null>(null);
 
 const Tabs = ({
-  index = null,
+  index,
   children,
   size = "sm",
-  defaultIndex,
+  defaultIndex = -1,
   onTabClick,
 }: ITabsProps) => {
   const [activeIndex, setActiveIndex] = useState(defaultIndex);
 
-  const handleTabClick = (index: number) => {
-    setActiveIndex(index);
-    if (onTabClick) onTabClick(index);
-  };
+  const handleTabClick = useCallback(
+    (index: number) => {
+      setActiveIndex(index);
+      if (onTabClick) onTabClick(index);
+    },
+    [onTabClick]
+  );
 
   useEffect(() => {
-    if (index !== null) {
+    if (index) {
       setActiveIndex(index);
     }
   }, [index]);
 
+  const contextObj: ITabsContext = useMemo(
+    () => ({
+      activeIndex,
+      size,
+      handleTabClick,
+    }),
+    [size, activeIndex, handleTabClick]
+  );
+
   return (
-    <TabsContext.Provider
-      value={{
-        activeIndex,
-        size,
-        handleTabClick,
-      }}
-    >
-      {children}
-    </TabsContext.Provider>
+    <TabsContext.Provider value={contextObj}>{children}</TabsContext.Provider>
   );
 };
 
