@@ -18,7 +18,7 @@ interface IPagination {
 const Pagination = ({ totalPage, currentPage, handleChange }: IPagination) => {
   const [page, setPage] = useState<string>("1");
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setPage(String(currentPage));
@@ -45,7 +45,7 @@ const Pagination = ({ totalPage, currentPage, handleChange }: IPagination) => {
   };
 
   const handleInputKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && inputRef.current) {
       handleResult();
       inputRef.current.blur();
     }
