@@ -28,7 +28,7 @@ const PaginationSpread = ({
     const newPage = Number(page) - 1;
     handleChange && handleChange(newPage);
     setPage(newPage);
-  }, [page]);
+  }, [page, handleChange]);
 
   const handleNextClick = useCallback(() => {
     const newPage = Number(page) + 1;
@@ -61,7 +61,7 @@ const PaginationSpread = ({
       />
       <div className={"flex gap-2"} onClick={handleClick}>
         <PageBtn active={page === 1} page={1} setPage={setPage} />
-        {middleArray().map((i) => {
+        {middleArray()?.map((i) => {
           return i === "..." ? (
             <p className="self-center">{i}</p>
           ) : (
