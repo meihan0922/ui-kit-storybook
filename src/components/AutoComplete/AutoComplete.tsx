@@ -6,15 +6,16 @@ import React, {
   useCallback,
 } from "react";
 import { Input, IInputProps } from "../Input/Input";
+import List from "../List/List";
 import useDebounce from "../../hooks/useDebounce";
 import useClickoutside from "../../hooks/useClickoutside";
+
+// TODO: 待新增List滾動與keyboard連動
+// TODO: 點選項目，關閉選單後，資料更新的時間有待商榷..
+
 interface DataSourceObj {
   value: string;
 }
-
-// TODO: 待新增loading元件
-// TODO: 暫定List只夠塞入十筆資料，多餘的與keyboard連動 待新增
-// TODO: 點選項目，關閉選單後，資料更新的時間有待商榷..
 
 export type DataSourceType<T = {}> = T & DataSourceObj;
 
@@ -41,8 +42,9 @@ export const AutoComplete = ({
   const [filterData, setFilterData] = useState<DataSourceType[]>([]);
   const [highlightIndex, setHighlightIndex] = useState(-1);
 
-  const triggerSearch = useRef(false);
+  //   const triggerSearch = useRef(false);
   const Container = useRef<HTMLDivElement>(null);
+  const InputRef = useRef<HTMLInputElement>(null);
 
   const debounceVal = useDebounce(inputVal, 500);
 
@@ -52,27 +54,28 @@ export const AutoComplete = ({
   });
 
   useEffect(() => {
-    if (triggerSearch.current && debounceVal) {
+    // if (triggerSearch.current && debounceVal) {
+    if (isLoading && debounceVal) {
       const result = fetchFn(debounceVal);
       if (result instanceof Promise) {
         result.then((res) => {
           // 預防需要處理的資料太大包，延遲顯示
           startTransition(() => setFilterData(res));
-          // 不管如何isPending變動的時間晚於setIsLoading(false)
-          setIsLoading(false);
         });
       } else {
         startTransition(() => setFilterData(result));
       }
-      triggerSearch.current = false;
+      // 不管如何isPending變動的時間晚於setIsLoading(false)
+      setIsLoading(false);
+      //   triggerSearch.current = false;
     }
-  }, [debounceVal, fetchFn, isShowDropdpwn]);
+  }, [isLoading, debounceVal, fetchFn, isShowDropdpwn]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setInputValue(val);
-    setIsLoading(true);
-    triggerSearch.current = true;
+    setIsLoading(true); // 只有loading開始後 才需要trigger搜尋
+    // triggerSearch.current = true;
   };
 
   const handleSelect = useCallback(
@@ -80,7 +83,8 @@ export const AutoComplete = ({
       setShowDropDown(false);
       setInputValue(i.value);
       onSelect && onSelect(i);
-      triggerSearch.current = false;
+      //   triggerSearch.current = false;
+      InputRef.current?.blur();
     },
     [onSelect]
   );
@@ -89,7 +93,7 @@ export const AutoComplete = ({
     (e: React.KeyboardEvent<HTMLElement>) => {
       let idx = highlightIndex;
       const countHighLight = (idx) => {
-        if (idx < 0) return 0;
+        if (idx < 0) return -1;
         if (idx >= filterData.length) return filterData.length - 1;
         return idx;
       };
@@ -112,55 +116,32 @@ export const AutoComplete = ({
     },
     [highlightIndex, filterData, handleSelect]
   );
-
   return (
-    <div className="" ref={Container}>
+    <div className="relative" ref={Container}>
       <Input
+        ref={InputRef}
         value={inputVal}
         onChange={handleChange}
         onFocus={() => {
           setShowDropDown(true);
-          triggerSearch.current = true;
+          //   triggerSearch.current = true;
         }}
         onKeyDown={handleKeyDown}
         {...restProps}
       />
       {isShowDropdpwn && inputVal ? (
-        <List
-          loading={isPending || isLoading}
-          data={filterData}
-          renderOption={renderOption}
-          handleSelect={handleSelect}
-        />
+        <div className="absolute top-10">
+          <List
+            loading={isPending || isLoading}
+            data={filterData}
+            renderOption={renderOption}
+            handleSelect={handleSelect}
+            highlightIndex={highlightIndex}
+            defaultIndex={filterData.findIndex((i) => i.value === inputVal)}
+          />
+        </div>
       ) : null}
     </div>
   );
 };
-
-const List = React.memo<{
-  loading: boolean;
-  data: DataSourceType[];
-  renderOption?: (item: DataSourceType) => JSX.Element;
-  handleSelect: (i: DataSourceType) => void;
-}>(({ data, renderOption, handleSelect, loading }) => {
-  let statusText = "";
-  if (loading) {
-    statusText = "loading...";
-  } else if (data?.length === 0) {
-    statusText = "no data...";
-  }
-
-  return (
-    <ul>
-      {statusText ? (
-        <li>{statusText}</li>
-      ) : (
-        data.map((i, idx) => (
-          <li key={i.value + idx} onClick={() => handleSelect(i)}>
-            {renderOption ? renderOption(i) : i.value}
-          </li>
-        ))
-      )}
-    </ul>
-  );
-});
+export default AutoComplete;

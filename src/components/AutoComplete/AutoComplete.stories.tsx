@@ -1,5 +1,6 @@
 import { AutoComplete, DataSourceType } from "./AutoComplete";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { actions } from "@storybook/addon-actions";
 import mdx from "./AutoComplete.mdx";
 
 export default {
@@ -36,15 +37,38 @@ const fakeData = [
 ];
 
 export const Basic = () => {
+  return (
+    <>
+      <AutoComplete
+        fetchFn={(query) => fakeData.filter((i) => i.value.indexOf(query) > -1)}
+        onSelect={actions}
+        placeholder="搜尋任意數字"
+      />
+    </>
+  );
+};
+Basic.storyName = "Basic";
+
+export const RenderOption = () => {
   const renderOption = (item: DataSourceType) => {
-    const itemAddType = item as DataSourceType<{ url: string }>;
-    return (
-      <div>
-        {itemAddType.value} {itemAddType.url}
-      </div>
-    );
+    const itemAddType = item as DataSourceType<{ name: string }>;
+    return <div>{`${itemAddType.value} --->>> ${itemAddType.name}`}</div>;
   };
 
+  return (
+    <>
+      <AutoComplete
+        fetchFn={(query) => fakeData.filter((i) => i.value.indexOf(query) > -1)}
+        onSelect={actions}
+        renderOption={renderOption}
+        placeholder="搜尋任意數字"
+      />
+    </>
+  );
+};
+RenderOption.storyName = "客製化render選項";
+
+export const PromiseFetch = () => {
   const newFetch = (query) => {
     return query
       ? fetch(`https://api.github.com/search/users?q=${query}`)
@@ -60,18 +84,9 @@ export const Basic = () => {
 
   return (
     <>
-      <p>size: sm</p>
-      <AutoComplete
-        //   fetchFn={(query) => {
-        //     const a = fakeData.filter((d) => d.value.indexOf(query) > -1);
-        //     console.log(a);
-        //     return a;
-        //   }}
-        fetchFn={newFetch}
-        onSelect={() => {}}
-        renderOption={renderOption}
-      />
+      <p>搜尋github用戶</p>
+      <AutoComplete fetchFn={newFetch} onSelect={actions} />
     </>
   );
 };
-Basic.storyName = "測試用";
+PromiseFetch.storyName = "非同步搜尋資料";

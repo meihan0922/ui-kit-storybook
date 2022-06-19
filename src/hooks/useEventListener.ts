@@ -20,8 +20,11 @@ const useEventListener = <
   handler: (event: WindowEventMap[WE] | HTMLElementEventMap[HE]) => void;
   element?: React.RefObject<T>;
 }) => {
-  // 怕是handler會變化，造成不必要的useEffect，必需存起來
-  const storeCallback = useRef(handler);
+  // 存cb是為了在effect的時候 確保拿到最新的cb
+  const storeCallback =
+    useRef<(event: WindowEventMap[WE] | HTMLElementEventMap[HE]) => void>(
+      handler
+    );
   // TODO: useLayoutEffect支援SSR
   useEffect(() => {
     storeCallback.current = handler;
@@ -29,7 +32,7 @@ const useEventListener = <
 
   useEffect(() => {
     const target = element?.current || window;
-    if (!target?.addEventListener) return;
+    if (!target?.addEventListener || !storeCallback.current) return;
     const enentHandler = (e) => storeCallback.current(e);
     target.addEventListener(eventName, enentHandler);
     return () => target.removeEventListener(eventName, enentHandler);

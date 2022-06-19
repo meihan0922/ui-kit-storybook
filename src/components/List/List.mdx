@@ -1,0 +1,17 @@
+import { Props, Canvas, Story, Preview } from "@storybook/addon-docs";
+import List from "./List";
+
+# List
+
+<Props components={{ List }} />
+
+<h2>下拉選單，提供Select、Autocomplete組件</h2>
+<p>
+  尚未優化多筆資料時的高亮選取行為，應該要使用zustand之類的狀態管理，進行shallow比較，優化渲染效能
+  ，就不會高頻率觸發data.map
+</p>
+<p>尚未做客製化高度寬度</p>
+
+<Canvas>
+  <Story id="list--basic" />
+</Canvas>
