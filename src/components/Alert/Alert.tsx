@@ -48,7 +48,7 @@ const Icon: { [key in AlertType]: JSX.Element } = {
   ),
 };
 
-export const Alert = ({ type = "success", children }: IAlertProps) => {
+const Alert = ({ type = "success", children }: IAlertProps) => {
   return (
     <div className="px-4 py-5 max-w-[350px] flex rounded bg-styleColors-lightBlue text-styleColors-mainGray">
       {type !== "none" && <div className="mr-4">{Icon[type]}</div>}
@@ -56,3 +56,5 @@ export const Alert = ({ type = "success", children }: IAlertProps) => {
     </div>
   );
 };
+
+export default Alert;

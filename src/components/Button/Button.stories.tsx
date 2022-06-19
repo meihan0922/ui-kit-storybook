@@ -1,25 +1,27 @@
-import { Button } from "./Button";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
   faAngleRight,
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
-import { Color } from "../../type/color.ts";
+import { ComponentMeta } from "@storybook/react";
+import mdx from "./Button.mdx";
 
-<Meta title="Button" component={Button} />
+export default {
+  title: "Button",
+  component: Button,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+} as ComponentMeta<typeof Button>;
 
-# Button
-
-<Props components={{ Button }} />
-
-### Size
-
-<Preview>
-  <Story name="Size">
+export const Size = () => {
+  return (
     <>
-      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
+      <div className="flex gap-10 mb-2.5">
         <Button>Download</Button>
         <Button variants="style2">Download</Button>
         <Button variants="style3">Download</Button>
@@ -31,7 +33,7 @@ import { Color } from "../../type/color.ts";
           <FontAwesomeIcon size="lg" icon={faGear} />
         </Button>
       </div>
-      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
+      <div className="flex gap-10 mb-2.5">
         <Button size="lg">Download</Button>
         <Button size="lg" variants="style2">
           Download
@@ -44,15 +46,14 @@ import { Color } from "../../type/color.ts";
         </Button>
       </div>
     </>
-  </Story>
-</Preview>
+  );
+};
+Size.storyName = "Size";
 
-### Disabled
-
-<Preview>
-  <Story name="Disabled">
+export const Disabled = () => {
+  return (
     <>
-      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
+      <div className="flex gap-10 mb-2.5">
         <Button disabled>Download</Button>
         <Button disabled variants="style2">
           Download
@@ -70,7 +71,7 @@ import { Color } from "../../type/color.ts";
           <FontAwesomeIcon size="lg" icon={faGear} />
         </Button>
       </div>
-      <div style={{ display: "flex", gap: "40px", marginBottom: "10px" }}>
+      <div className="flex gap-10 mb-2.5">
         <Button disabled size="lg">
           Download
         </Button>
@@ -85,29 +86,19 @@ import { Color } from "../../type/color.ts";
         </Button>
       </div>
     </>
-  </Story>
-</Preview>
+  );
+};
+Disabled.storyName = "Disabled";
 
-### Block
+export const Block = () => {
+  return <Button block>Download</Button>;
+};
+Block.storyName = "Block";
 
-<Preview>
-  <Story name="Block">
-    <Button block>Download</Button>
-  </Story>
-</Preview>
-
-### Combined Buttons
-
-<Preview>
-  <Story name="Combined Buttons">
-    <div
-      style={{
-        display: "flex",
-        gap: "40px",
-        marginBottom: "10px",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center" }}>
+export const CombinedButtons = () => {
+  return (
+    <div className="flex gap-10 mb-2.5">
+      <div className="flex items-center">
         <Button combined="left">
           <FontAwesomeIcon size="lg" icon={faAngleLeft} />
           <p style={{ marginLeft: "14px", display: "inline-block" }}>Back</p>
@@ -123,7 +114,7 @@ import { Color } from "../../type/color.ts";
           Next
         </Button>
       </div>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div className="flex items-center">
         <Button combined="left">
           <FontAwesomeIcon size="lg" icon={faAngleLeft} />
         </Button>
@@ -132,15 +123,14 @@ import { Color } from "../../type/color.ts";
         </Button>
       </div>
     </div>
-  </Story>
-</Preview>
+  );
+};
+CombinedButtons.storyName = "Combined-Buttons";
 
-### Combined Buttons Disabled
-
-<Preview>
-  <Story name="Combined Buttons Disabled">
-    <div style={{ display: "flex", gap: "40px" }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
+export const CombinedButtonsDisabled = () => {
+  return (
+    <div className="flex gap-10 mb-2.5">
+      <div className="flex items-center">
         <Button disabled combined="left">
           <FontAwesomeIcon size="lg" icon={faAngleLeft} />
           <p style={{ marginLeft: "14px", display: "inline-block" }}>Back</p>
@@ -158,14 +148,15 @@ import { Color } from "../../type/color.ts";
           Next
         </Button>
       </div>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div className="flex items-center">
         <Button disabled combined="left">
           <FontAwesomeIcon size="lg" icon={faAngleLeft} />
         </Button>
-        <Button disabled combined="right" variants="style4">
+        <Button disabled combined="right" variants="style3">
           <FontAwesomeIcon size="lg" icon={faAngleRight} />
         </Button>
       </div>
     </div>
-  </Story>
-</Preview>
+  );
+};
+CombinedButtons.storyName = "Combined-Buttons-Disabled";

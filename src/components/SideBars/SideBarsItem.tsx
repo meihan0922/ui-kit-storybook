@@ -48,10 +48,12 @@ export interface ISideBarsItemProps {
 }
 
 const SideBarsItem = ({ index = "0", text, icon }: ISideBarsItemProps) => {
-  const { activeIndex, onSelect, variants, size } = useContext(SideBarsContext);
+  const context = useContext(SideBarsContext);
+  if (!context) return;
+  const { activeIndex, onSelect, variants, size } = context;
   const handleClick = () => {
     if (activeIndex !== index) {
-      onSelect(index);
+      onSelect && onSelect(index);
     }
   };
 
@@ -104,4 +106,4 @@ const SideBarsItem = ({ index = "0", text, icon }: ISideBarsItemProps) => {
   );
 };
 
-export { SideBarsItem };
+export default SideBarsItem;

@@ -11,12 +11,12 @@ const TabsList = ({ children }: ITabsPanelProps) => {
     <ul className="flex items-center justify-start gap-5">
       {React.Children.map(children, (child, index) => {
         const childEle = child as React.FunctionComponentElement<ITabButton>;
-        const { displayName } = childEle.type;
+        const displayName = childEle.type.displayName;
         if (displayName === "Tab") {
           return React.cloneElement(childEle, { index });
         } else {
           console.error(
-            "warn: children must be SideBarsItem. And text or icon must pass one."
+            "warn: children must be Tab. And text or icon must pass one."
           );
           return null;
         }
@@ -25,4 +25,4 @@ const TabsList = ({ children }: ITabsPanelProps) => {
   );
 };
 
-export { TabsList };
+export default TabsList;

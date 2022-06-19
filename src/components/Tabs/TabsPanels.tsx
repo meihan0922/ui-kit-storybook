@@ -23,12 +23,12 @@ const TabsPanels = forwardRef<HTMLDivElement, ITabsPanelsProps>(
             {React.Children.map(children, (child, i) => {
               const childEle =
                 child as React.FunctionComponentElement<ITabsPanelProps>;
-              const { displayName } = childEle.type;
-              if (displayName === "TabsPanel" && i === activeIndex) {
-                return React.cloneElement(childEle);
+              const displayName = childEle.type.displayName;
+              if (displayName === "TabsPanel") {
+                return i === activeIndex ? React.cloneElement(childEle) : null;
               } else {
                 console.error(
-                  "warn: children must be SideBarsItem. And text or icon must pass one."
+                  "warn: children must be TabsPanel. And text or icon must pass one."
                 );
                 return null;
               }
@@ -40,4 +40,4 @@ const TabsPanels = forwardRef<HTMLDivElement, ITabsPanelsProps>(
   }
 );
 
-export { TabsPanels };
+export default TabsPanels;

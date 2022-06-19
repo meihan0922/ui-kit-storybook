@@ -6,4 +6,4 @@ export interface ITabsPanelProps {
 
 const TabsPanel = ({ children }: ITabsPanelProps) => <div>{children}</div>;
 
-export { TabsPanel };
+export default TabsPanel;

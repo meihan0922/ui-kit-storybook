@@ -1,4 +1,4 @@
-import { CircleLoader } from "./CircleLoader";
+import CircleLoader from "./CircleLoader";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {

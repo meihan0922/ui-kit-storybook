@@ -33,7 +33,7 @@ export interface IContext {
   //   isOpen: boolean;
   onSelect?: (selectedIndex: string) => void;
 }
-export const SideBarsContext = createContext<IContext>(null);
+export const SideBarsContext = createContext<IContext | null>(null);
 
 const SideBars = ({
   size = "sm",
@@ -85,7 +85,7 @@ const SideBars = ({
           {React.Children.map(children, (child, index) => {
             const childEle =
               child as React.FunctionComponentElement<ISideBarsItemProps>;
-            const { displayName } = childEle.type;
+            const displayName = childEle.type.displayName;
             if (
               (displayName === "SideBarsItem" &&
                 (childEle.props?.text || childEle.props?.icon)) ||
@@ -105,4 +105,4 @@ const SideBars = ({
   );
 };
 
-export { SideBars };
+export default SideBars;

@@ -38,9 +38,11 @@ const SideBarsGroup = ({
   index,
   children,
 }: ISideBarsGroupProps) => {
-  const { activeIndex, size } = useContext(SideBarsContext);
-  const isToggleAble = size === "lg" && toggleable;
+  const context = useContext(SideBarsContext);
   const [isOpen, toggleOpen] = useReducer((state) => !state, defaultOpen);
+  if (!context) return;
+  const { activeIndex, size } = context;
+  const isToggleAble = size === "lg" && toggleable;
   const level = activeIndex.split("-")[0];
   //   const handleClick = () => {
   //     toggleOpen()
@@ -78,7 +80,7 @@ const SideBarsGroup = ({
             {React.Children.map(children, (child, i) => {
               const childEle =
                 child as React.FunctionComponentElement<ISideBarsItemProps>;
-              const { displayName } = childEle.type;
+              const displayName = childEle.type.displayName;
               if (
                 displayName === "SideBarsItem" &&
                 (childEle.props?.text || childEle.props?.icon)
@@ -98,4 +100,4 @@ const SideBarsGroup = ({
   );
 };
 
-export { SideBarsGroup };
+export default SideBarsGroup;

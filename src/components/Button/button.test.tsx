@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, IButtonProps } from "./Button";
+import Button, { IButtonProps } from "./Button";
 import { render, fireEvent, screen } from "@testing-library/react";
 
 type TestProps = Omit<IButtonProps, "children">;

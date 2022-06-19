@@ -47,7 +47,7 @@ const styleVariants: { [key in InputStyle]: { init: string; event: string } } =
     },
   };
 
-export const Input = forwardRef<HTMLInputElement, IInputProps>((props, ref) => {
+const Input = forwardRef<HTMLInputElement, IInputProps>((props, ref) => {
   const {
     disabled,
     size = "sm",
@@ -111,3 +111,5 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>((props, ref) => {
     </div>
   );
 });
+
+export default Input;

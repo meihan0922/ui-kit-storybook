@@ -16,7 +16,7 @@ export interface ITabsProps {
 }
 
 interface ITabsContext {
-  size?: SizeType;
+  size: SizeType;
   activeIndex: number;
   handleTabClick: (id: number) => void;
 }
@@ -60,4 +60,4 @@ const Tabs = ({
   );
 };
 
-export { Tabs };
+export default Tabs;

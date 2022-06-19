@@ -2,7 +2,7 @@ import cx from "classnames";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 
 export interface IPaginationSpreadProps {
   totalPage: number;
@@ -141,4 +141,4 @@ const PrevArrow = ({
   );
 };
 
-export { PaginationSpread };
+export default PaginationSpread;

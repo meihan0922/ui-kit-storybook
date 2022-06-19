@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 // staggerChildren:
 // https://www.framer.com/docs/transition/###staggerchildren
 
-export const ThreeDotsLoader = ({
+const ThreeDotsLoader = ({
   width = "2rem",
   height = "2rem",
 }: {

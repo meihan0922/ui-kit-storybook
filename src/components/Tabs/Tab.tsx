@@ -21,14 +21,13 @@ const sizeStyle: {
 
 const Tab = ({ children, index, disabled = false }: ITabButton) => {
   const context = useContext(TabsContext);
-  if (!(context?.activeIndex && context?.size && context?.handleTabClick))
-    return null;
+  if (!context) return null;
 
   const { activeIndex, size, handleTabClick } = context;
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (index) handleTabClick(index);
+    if (index !== undefined) handleTabClick(index);
   };
 
   return (
@@ -58,4 +57,4 @@ const Tab = ({ children, index, disabled = false }: ITabButton) => {
   );
 };
 
-export { Tab };
+export default Tab;

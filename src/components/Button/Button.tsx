@@ -48,7 +48,7 @@ const styleVariants: { [key in BtnStyle]: { init: string; event: string } } = {
   },
 };
 
-export const Button = ({
+const Button = ({
   block = false,
   size = "sm",
   disabled = false,
@@ -98,3 +98,5 @@ export const Button = ({
     </button>
   );
 };
+
+export default Button;

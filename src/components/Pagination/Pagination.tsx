@@ -3,7 +3,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 
 const InputWrapper = styled.input<{ width: string }>`
   width: ${(props) => props.width};
@@ -146,4 +146,4 @@ const PrevArrow = ({
   );
 };
 
-export { Pagination };
+export default Pagination;

@@ -1,5 +1,5 @@
-import { AutoComplete, DataSourceType } from "./AutoComplete";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import AutoComplete, { DataSourceType } from "./AutoComplete";
+import { ComponentMeta } from "@storybook/react";
 import { actions } from "@storybook/addon-actions";
 import mdx from "./AutoComplete.mdx";
 

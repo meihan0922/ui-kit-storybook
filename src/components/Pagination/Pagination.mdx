@@ -1,0 +1,15 @@
+import Pagination from "./Pagination.tsx";
+import { Props, Canvas, Story, Preview } from "@storybook/addon-docs";
+
+# Pagination
+
+<Props components={{ Pagination }} />
+
+<h2>
+  中間的頁數為 input，可直接輸入頁數，當為空或是 0 會轉換成
+  1，當數字超出總頁數會轉換成總頁數。 輸入完 enter 會 blur 掉。
+</h2>
+
+<Canvas>
+  <Story id="pagination--basic" />
+</Canvas>

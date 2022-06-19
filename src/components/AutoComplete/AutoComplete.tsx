@@ -5,7 +5,7 @@ import React, {
   useTransition,
   useCallback,
 } from "react";
-import { Input, IInputProps } from "../Input/Input";
+import Input, { IInputProps } from "../Input/Input";
 import List from "../List/List";
 import useDebounce from "../../hooks/useDebounce";
 import useClickoutside from "../../hooks/useClickoutside";
@@ -28,7 +28,7 @@ export interface IAutoCompleteProps extends Omit<IInputProps, "onSelect"> {
   renderOption?: (item: DataSourceType) => JSX.Element;
 }
 
-export const AutoComplete = ({
+const AutoComplete = ({
   fetchFn,
   onSelect,
   value,
