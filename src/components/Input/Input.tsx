@@ -77,7 +77,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     delete restProps.defaultValue;
     restProps.value = fixControlledValue(props.value);
   }
-  console.log("?????", `${sizeVariants[size].label}`, Boolean(label));
+
   return (
     <div className="relative">
       {icon && icon}
