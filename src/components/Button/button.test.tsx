@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, IButtonProps } from "./Button";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 
 type TestProps = Omit<IButtonProps, "children">;
 
@@ -13,10 +13,10 @@ const testDisabledProps: TestProps = {
 };
 
 describe("test button component", () => {
-  it("渲染對的預設按鈕", () => {
+  it("渲染對的預設按鈕", async () => {
     const txt = "Nice";
-    const wrapper = render(<Button {...defaultProps}>{txt}</Button>);
-    const ele = wrapper.getByText(txt) as HTMLButtonElement;
+    await render(<Button {...defaultProps}>{txt}</Button>);
+    const ele = screen.getByText(txt) as HTMLButtonElement;
     expect(ele).toBeInTheDocument();
     expect(ele.tagName).toEqual("BUTTON");
     expect(ele.disabled).toBeFalsy();
@@ -24,32 +24,32 @@ describe("test button component", () => {
     expect(defaultProps.onClick).toHaveBeenCalled();
   });
 
-  it("url有值時，轉換成<a>", () => {
+  it("url有值時，轉換成<a>", async () => {
     const txt = "Link";
-    const wrapper = render(<Button url="www.goole.com">{txt}</Button>);
-    const ele = wrapper.getByText(txt);
+    await render(<Button url="www.goole.com">{txt}</Button>);
+    const ele = screen.getByText(txt);
     expect(ele).toBeInTheDocument();
     expect(ele.tagName).toEqual("A");
   });
 
-  it("disabled時，應為<button>，不觸發click行為", () => {
+  it("disabled時，應為<button>，不觸發click行為", async () => {
     const txt = "disabled";
-    const wrapper = render(<Button {...testDisabledProps}>{txt}</Button>);
-    const ele = wrapper.getByText(txt) as HTMLButtonElement;
+    await render(<Button {...testDisabledProps}>{txt}</Button>);
+    const ele = screen.getByText(txt) as HTMLButtonElement;
     expect(ele).toBeInTheDocument();
     expect(ele.disabled).toBeTruthy();
     fireEvent.click(ele);
     expect(testDisabledProps.onClick).not.toHaveBeenCalled();
   });
 
-  it("disabled且url有值時，應為<a>，不觸發click行為", () => {
+  it("disabled且url有值時，應為<a>，不觸發click行為", async () => {
     const txt = "disabled";
-    const wrapper = render(
+    await render(
       <Button disabled url="www.goole.com">
         {txt}
       </Button>
     );
-    const ele = wrapper.getByText(txt) as HTMLButtonElement;
+    const ele = screen.getByText(txt) as HTMLButtonElement;
     expect(ele).toBeInTheDocument();
     expect(ele.tagName).toEqual("A");
     fireEvent.click(ele);
