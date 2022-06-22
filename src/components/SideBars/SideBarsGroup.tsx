@@ -14,7 +14,9 @@ export interface ISideBarsGroupProps {
   /** SideBarsGroup的序列編號，不用傳，內部已實做 */
   index?: string;
   /** children: must be SideBarItem */
-  children: JSX.Element;
+  children:
+    | React.FunctionComponentElement<ISideBarsItemProps>
+    | React.FunctionComponentElement<ISideBarsItemProps>[];
   /** toggle default Status */
   defaultOpen?: boolean;
 }
@@ -40,7 +42,7 @@ const SideBarsGroup = ({
 }: ISideBarsGroupProps) => {
   const context = useContext(SideBarsContext);
   const [isOpen, toggleOpen] = useReducer((state) => !state, defaultOpen);
-  if (!context) return;
+  if (!context || !children) return null;
   const { activeIndex, size } = context;
   const isToggleAble = size === "lg" && toggleable;
   const level = activeIndex.split("-")[0];
@@ -78,14 +80,12 @@ const SideBarsGroup = ({
             exit={{ opacity: 0 }}
           >
             {React.Children.map(children, (child, i) => {
-              const childEle =
-                child as React.FunctionComponentElement<ISideBarsItemProps>;
-              const displayName = childEle.type.displayName;
+              const displayName = child.type.displayName;
               if (
                 displayName === "SideBarsItem" &&
-                (childEle.props?.text || childEle.props?.icon)
+                (child.props?.text || child.props?.icon)
               ) {
-                return React.cloneElement(childEle, { index: `${index}-${i}` });
+                return React.cloneElement(child, { index: `${index}-${i}` });
               } else {
                 console.error(
                   "warn: children must be SideBarsItem. And text or icon must pass one."

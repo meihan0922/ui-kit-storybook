@@ -4,7 +4,9 @@ import { ITabsPanelProps } from "./TabsPanel";
 
 export interface ITabsPanelsProps {
   /** children: must be TabPanel */
-  children: JSX.Element;
+  children:
+    | React.FunctionComponentElement<ITabsPanelProps>
+    | React.FunctionComponentElement<ITabsPanelProps>[];
 }
 
 const TabsPanels = forwardRef<HTMLDivElement, ITabsPanelsProps>(
@@ -21,11 +23,9 @@ const TabsPanels = forwardRef<HTMLDivElement, ITabsPanelsProps>(
         <div ref={panelContainer} className="relative overflow-y-auto">
           <div className="h-full">
             {React.Children.map(children, (child, i) => {
-              const childEle =
-                child as React.FunctionComponentElement<ITabsPanelProps>;
-              const displayName = childEle.type.displayName;
+              const displayName = child.type.displayName;
               if (displayName === "TabsPanel") {
-                return i === activeIndex ? React.cloneElement(childEle) : null;
+                return i === activeIndex ? React.cloneElement(child) : null;
               } else {
                 console.error(
                   "warn: children must be TabsPanel. And text or icon must pass one."

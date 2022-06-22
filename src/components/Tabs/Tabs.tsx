@@ -56,7 +56,9 @@ const Tabs = ({
   );
 
   return (
-    <TabsContext.Provider value={contextObj}>{children}</TabsContext.Provider>
+    <div>
+      <TabsContext.Provider value={contextObj}>{children}</TabsContext.Provider>
+    </div>
   );
 };
 

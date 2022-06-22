@@ -3,6 +3,7 @@ import cx from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { ISideBarsItemProps } from "./SideBarsItem";
+import { ISideBarsGroupProps } from "./SideBarsGroup";
 
 export type SideBarsStyle = "style1" | "style2" | "style3";
 export type SideBarsSize = "sm" | "lg";
@@ -17,7 +18,11 @@ export interface ISideBarsProps {
   /** SideBars status */
   onSelect?: (selectedIndex: string) => void;
   /** children: must be SideBarItem ||  SideBarsGroup */
-  children: React.ReactNode;
+  children:
+    | React.FunctionComponentElement<ISideBarsGroupProps | ISideBarsItemProps>
+    | React.FunctionComponentElement<
+        ISideBarsGroupProps | ISideBarsItemProps
+      >[];
 }
 
 const styleVariants: { [key in SideBarsStyle]: string } = {
@@ -83,15 +88,15 @@ const SideBars = ({
           }}
         >
           {React.Children.map(children, (child, index) => {
-            const childEle =
-              child as React.FunctionComponentElement<ISideBarsItemProps>;
-            const displayName = childEle.type.displayName;
+            const displayName = child.type.displayName;
             if (
               (displayName === "SideBarsItem" &&
-                (childEle.props?.text || childEle.props?.icon)) ||
+                (child.props?.text ||
+                  (child as React.FunctionComponentElement<ISideBarsItemProps>)
+                    .props?.icon)) ||
               displayName === "SideBarsGroup"
             ) {
-              return React.cloneElement(childEle, { index: String(index) });
+              return React.cloneElement(child, { index: String(index) });
             } else {
               console.error(
                 "warn: children must be SideBarsItem. And text or icon must pass one."

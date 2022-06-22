@@ -3,17 +3,18 @@ import { ITabButton } from "./Tab";
 
 export interface ITabsPanelProps {
   /** children: must be Tab */
-  children: JSX.Element;
+  children:
+    | React.FunctionComponentElement<ITabButton>
+    | React.FunctionComponentElement<ITabButton>[];
 }
 
 const TabsList = ({ children }: ITabsPanelProps) => {
   return (
     <ul className="flex items-center justify-start gap-5">
       {React.Children.map(children, (child, index) => {
-        const childEle = child as React.FunctionComponentElement<ITabButton>;
-        const displayName = childEle.type.displayName;
+        const displayName = child.type.displayName;
         if (displayName === "Tab") {
-          return React.cloneElement(childEle, { index });
+          return React.cloneElement(child, { index });
         } else {
           console.error(
             "warn: children must be Tab. And text or icon must pass one."

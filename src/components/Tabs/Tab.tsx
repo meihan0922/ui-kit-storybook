@@ -7,7 +7,7 @@ export interface ITabButton {
   /** Tab的序列編號，不用傳，內部已實做 */
   index?: number;
   /** Tab children */
-  children: JSX.Element | string;
+  children: React.ReactNode;
   /** Tab disabled */
   disabled?: boolean;
 }

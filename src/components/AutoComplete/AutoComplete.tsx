@@ -69,7 +69,7 @@ const AutoComplete = ({
       setIsLoading(false);
       //   triggerSearch.current = false;
     }
-  }, [isLoading, debounceVal, fetchFn, isShowDropdpwn]);
+  }, [isLoading, debounceVal, fetchFn]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -130,7 +130,7 @@ const AutoComplete = ({
         {...restProps}
       />
       {isShowDropdpwn && inputVal ? (
-        <div className="absolute top-10">
+        <div className="absolute top-10 z-50">
           <List
             loading={isPending || isLoading}
             data={filterData}

@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface ITabsPanelProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 const TabsPanel = ({ children }: ITabsPanelProps) => <div>{children}</div>;

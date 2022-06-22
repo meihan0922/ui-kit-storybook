@@ -49,7 +49,7 @@ export interface ISideBarsItemProps {
 
 const SideBarsItem = ({ index = "0", text, icon }: ISideBarsItemProps) => {
   const context = useContext(SideBarsContext);
-  if (!context) return;
+  if (!context) return null;
   const { activeIndex, onSelect, variants, size } = context;
   const handleClick = () => {
     if (activeIndex !== index) {

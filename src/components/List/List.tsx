@@ -1,5 +1,5 @@
 import React from "react";
-import { ThreeDotsLoader } from "../ThreeDotsLoader/ThreeDotsLoader";
+import ThreeDotsLoader from "../ThreeDotsLoader/ThreeDotsLoader";
 import cx from "classnames";
 
 // TODO: 尚未優化多筆資料時的高亮選取行為，應該要使用zustand之類的狀態管理，進行shallow比較，優化渲染效能
@@ -40,7 +40,7 @@ const List = ({
   }
 
   return (
-    <ul className="w-fit min-w-[255px] max-h-[215px] overflow-y-auto text-sm h-auto py-2 shadow-lg rounded-md">
+    <ul className="bg-white w-fit min-w-[255px] max-h-[215px] overflow-y-auto text-sm h-auto py-2 shadow-lg rounded-md">
       {statusText ||
         data.map((i, idx) => (
           <li
